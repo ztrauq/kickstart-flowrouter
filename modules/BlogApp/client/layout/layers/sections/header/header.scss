@@ -1,0 +1,97 @@
+
+#maev.index .following.bar.mobile{
+    margin: 0 auto;
+    position:   absolute;
+    padding: 0;
+}
+#maev.index .following.bar.defaultHeader {
+    padding-top: 1em;
+}
+#maev.index .following.bar.defaultHeader .column>div{
+    vertical-align: middle;
+    display: inline-block;
+    width: 49%;
+}
+#maev.index .following.bar.defaultHeader .column>div>div{
+    float: right;
+}
+#maev.index .following.bar.mobile.landscape.noLogoHeader{
+    margin: auto;
+    top: 0;
+    padding: 2em 0;
+    /*width: auto;*/
+}
+#maev.index .following.bar.mobile.defaultHeader .ui.image{
+
+    margin: auto;
+    margin-bottom: 0.4em;
+}
+#maev.index .following.bar.mobile.landscape.defaultHeader .ui.image{
+
+    margin: auto;
+    margin-bottom: 0.0em;
+}
+#maev.index .following.bar.mobile.landscape.defaultHeader .right.floated.menu{
+    margin-top: 2.5%;
+}
+#maev.index .following.bar.mobile.defaultHeader .example.index .homeheadright.floated.menu{
+    clear: both;
+    margin-top: 0%;
+}
+#maev.index .following.bar.mobile.defaultHeader{
+    padding-top: 0.1em;
+    top: 0.0em;
+    width: 100%;
+    display: block;
+    background-color: rgba(255,255,255,0.8);
+}
+#maev.index .following.bar.mobile.noLogoHeader{
+    top: 5.4em;
+}
+
+#maev.index .following.bar .column>div{
+    margin: auto;
+    display: inline-block;
+
+}
+#maev.index .following.bar.mobile .column>div{
+    margin: auto;
+    display: block;
+    width: 100%;
+    text-align: left;
+
+}
+#maev.index .following.bar .column>div>div{
+    float: right;
+    text-align: left;
+
+}
+#maev.index .following.bar.mobile.landscape .column>div{
+    display: inline-block;
+    width: auto;
+
+}
+#maev.index .following.bar.mobile .column>div>div{
+    float: none;
+    text-align: left;
+
+}
+#maev.index .following.bar.mobile.landscape .column>div{
+    display: inline-block;
+    vertical-align: middle;
+    /*padding-top: 4%;*/
+    /*float: right;*/
+}
+#maev.index .following.bar.mobile.landscape .column>div>div{
+    float: right;
+}
+
+#brandLogo span{
+    font-family: 'Exo 2', sans-serif;    font-size: 2rem;
+    font-weight: 800;
+}
+
+#brandLogo img{
+    height: 55px;
+    width: 55px;
+}

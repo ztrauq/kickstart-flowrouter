@@ -1,0 +1,49 @@
+
+/* colours
+red     FF1D25
+blue    0071BC
+*/
+
+@import url(http://fonts.googleapis.com/css?family=Exo+2:400,900,800,200);
+
+html{
+    font-size: 16px !important;
+}
+
+body {
+    /*font-family: magistral-web,Lato,'Helvetica Neue',Arial,Helvetica,sans-serif;
+    font-size: 18pt;*/
+    /*
+        color: #0071BC;
+    */
+    /*position: relative;
+    height: 101%;*/
+    /*background-image: url("images/maev_wallpaper.png");*/
+    font-family: 'Exo 2', 'Lato', 'Helvetica Neue', Arial, Helvetica, sans-serif !important;
+    height: 100%;
+    overflow-x: visible;
+    padding: 0!important;
+    background-color: #efefef;
+}
+
+h1,h2,h3,h4,h5,h6,.header, .button{
+    font-family: 'Exo 2', 'Lato', 'Helvetica Neue', Arial, Helvetica, sans-serif !important;
+}
+h1,h2{
+    font-weight: 900 !important;
+}
+h3,h4,h5{
+    font-weight: 800;
+}
+
+.pusher {
+    display: flex;
+    overflow: visible;
+    min-height: 100vh;
+    flex-direction: column;
+}
+
+.pusher > .full.height {
+    flex: 1;
+}
+

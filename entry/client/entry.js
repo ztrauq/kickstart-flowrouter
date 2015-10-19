@@ -2,10 +2,10 @@
 import 'babel/polyfill';
 
 // Methods for optimistic updates
-import 'TodoApp/todo-methods';
+import 'BlogApp/blog-methods';
 
 import './routes';
 
-Accounts.ui.config({
+/*Accounts.ui.config({
   passwordSignupFields: 'USERNAME_ONLY'
-});
+});*/

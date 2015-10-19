@@ -22,8 +22,23 @@ kadira:react-layout
 react-runtime
 react-meteor-data
 thereactivestack:blazetoreact
-accounts-ui
-accounts-password
-
 
 npm-container
+
+accounts-base
+#accounts-ui
+accounts-password
+
+email
+reactive-var
+
+maev:accounts-semantic-ui
+maev:modal-semantic-ui
+
+garrilla:3r
+
+semantic:ui-css
+alanning:roles
+
+#garrilla:md-blog-sematic-ui
+ogourment:settings

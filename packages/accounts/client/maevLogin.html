@@ -1,0 +1,415 @@
+<template name="maevLogin">
+
+    <div class="ui left floated pages menu">
+        <nav class="ui menu">
+            {{#if loggingIn}}
+                <div class="ui active small inline loader"></div>
+            {{else}}
+                {{#unless noUsers}}
+                    {{#unless currentUser}}
+                        <a class="item sign in"><i class="sign in icon"></i>Sign-in</a>
+                        <a class="item register"><i class="add user icon"></i>Register</a>
+                    {{else}}
+                        <div class="ui simple right dropdown item">
+                            <i class="user icon"></i>{{currentUser.username}}
+                            <i class="dropdown icon"></i>
+                            <div class="menu">
+                                <div class="item user detail" >Profile</div>
+                                <div class="item change password">Change Password</div>
+                                {{#if isAdmin}}
+                                    <div class="divider"></div>
+                                    <div class="item roles" >Roles</div>
+                                {{/if}}
+                            </div>
+                        </div>
+                        <a class="item sign out"><i class="sign out icon"></i></a>
+                    {{/unless}}
+                {{else}}
+                    <a class="item register admin"><i class="add user icon"></i>Register as Admin</a>
+                {{/unless}}
+            {{/if}}
+
+        </nav>
+    </div>
+
+</template>
+
+<template name="maevLoginForm">
+    <div class="ui grid">
+        <div class="two wide column"></div>
+        <div class="twelve wide column">
+            {{> maevLoginPasswordForm}}
+            <div class="ui divider"></div>
+            <div class="ui fluid two item menu">
+                <a class="item password reset"><i class="mail icon"></i>I've forgotten my passsword</a>
+                <a class="item register"><i class="add user icon"></i>register new user</a>
+            </div>
+            <!--<div><a>send me a passsword reminder</a> | <a href="">register new user</a> </div>-->
+        </div>
+    </div>
+</template>
+
+<template name="maevLoginPasswordForm">
+    <h3 class="ui header">Please login with your existing credentials</h3>
+    <form id="login-form" class="ui login form "  action="submit" autocomplete="on">
+        <div class=" sixteen wide field">
+            <label>Email or Username</label>
+            <input placeholder="you@example.com" type="text" name="user">
+        </div>
+        <div class="sixteen wide field">
+            <label>Password</label>
+            <input placeholder="" type="password">
+        </div>
+        <div class=" sixteen wide field maev overflow">
+            <button class="ui primary right floated submit button">Submit</button>
+        </div>
+
+    </form>
+</template>
+
+<template name="maevLoginAccountSteps">
+    {{> maevLoginRegisterAccountForm}}
+    {{> maevLoginRegisterProfileForm}}
+    {{> maevLoginRegisterConfirmForm}}
+    <div class="ui hidden divider"></div>
+    <div class="ui three steps">
+        <div class="account step active" data-form="Account">
+            <i class="mail icon"></i>
+            <div class="content">
+                <div class="title">Account details</div>
+                <div class="description">Supply your email and password</div>
+            </div>
+        </div>
+        <div class="profile step disabled" data-form="Profile">
+            <i class="user icon"></i>
+            <div class="content">
+                <div class="title">Profiles</div>
+                <div class="description">Enter your profile information</div>
+            </div>
+        </div>
+        <div class="confirm step disabled" data-form="Confirm">
+            <i class="info icon"></i>
+            <div class="content">
+                <div class="title">Confirm registration</div>
+            </div>
+        </div>
+    </div>
+</template>
+
+<template name="maevLoginRegisterAccountForm">
+    <div id="maevLoginRegisterAccountForm" class="stepForm transition visible">
+        <h3 class="ui header">Register to become a user at {{settings "service.name"}}</h3>
+        <p>please complete all fields</p>
+        <form id="register-form" class="ui  form " autocomplete="off">
+            <div class=" sixteen wide field">
+                <label>Email <span>{{emailmsg}}</span></label>
+                <input name="email" placeholder="you@example.com" type="email" tabindex="1">
+            </div>
+            <div class=" sixteen wide field">
+                <label>Username <span>{{usermsg}}</span></label>
+                <input name="username" placeholder="username" type="text" tabindex="2" autocomplete="off">
+            </div>
+            <div class=" sixteen wide field">
+                <label>full name </label>
+                <input name="fullname" placeholder="full name" type="text" tabindex="3" autocomplete="off">
+            </div>
+            <div class="sixteen wide field">
+                <label>Password</label>
+                <p class="strengthtest">
+                    <input name="password" id="strong-password" placeholder="**********" type="password" tabindex="4">
+                </p>
+
+            </div>
+            <div class="sixteen wide field">
+                <label>Confirm Password {{#if isConfirmFocus}} <span class="ui description red">({{#unless isMatching}}not matching{{else}}matching{{/unless}})</span> {{/if}}</label>
+                <input id="confirm-password" placeholder="**********" type="password" tabindex="5">
+
+            </div>
+            <!--
+                    <button class="ui submit button disabled">Register</button>
+            -->
+            <div class="sixteen wide field">
+                <button type="submit" class="ui primary right floated button">
+                    Register
+                </button>
+                <button type="reset" class="ui right floated button" name="discard">
+                    Discard
+                </button>
+            </div>
+        </form>
+    </div>
+</template>
+
+<template name="maevLoginRegisterProfileForm">
+    <div id="maevLoginRegisterProfileForm" class="stepForm transition hidden">
+        <h3 class="ui header">Create your profile {{settings "service.name"}}</h3>
+        <p>please complete all fields</p>
+        <div id="profile-form" class="ui  form ">
+            <div class="ui three column grid">
+                <div class="column">
+                    <div class="ui horizontal segment">
+                        <div class=" sixteen wide field">
+                            <label>Username</label>
+                            <input name="username" placeholder="username" type="text" tabindex="1" value="{{username}}">
+                        </div>
+                    </div>
+                </div>
+                <div class="column">
+                    <div class="ui horizontal segment">
+                        <div class="sixteen wide field">
+                            <label>Avatar</label>
+                            <img class="ui small image" src="{{url}}">
+                            <input name="avatar" id="avatar" placeholder="" type="text" tabindex="2" value="{{url}}">
+                        </div>
+                    </div>
+                </div>
+                <div class="column">
+                    <div class="ui horizontal segment">
+                        <div class="sixteen wide field">
+                            <label>Bio</label>
+                            <p>
+                                <textarea name="bio" id="bio" placeholder="some text about you" tabindex="3"></textarea>
+                            </p>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</template>
+
+<template name="maevLoginRegisterConfirmForm">
+    <div id="maevLoginRegisterConfirmForm" class="stepForm transition hidden">
+        <h3 class="ui header">Confirm your new user credentials for {{settings "service.name"}}</h3>
+        <p>please complete all fields</p>
+        <div id="confirm-form" class="ui  form ">
+            <div class="ui three column grid">
+                <div class="column">
+                    <div class="ui horizontal segment">
+                        <div class=" sixteen wide field">
+                            <label>Username</label>
+                            <input name="username" placeholder="username" type="text" tabindex="1" value="{{username}}">
+                        </div>
+                    </div>
+                </div>
+                <div class="column">
+                    <div class="ui horizontal segment">
+                        <div class="sixteen wide field">
+                            <label>Avatar</label>
+                            <img class="ui small image" src="{{url}}">
+                            <input name="avatar" id="avatar" placeholder="" type="text" tabindex="2" value="{{url}}">
+                        </div>
+                    </div>
+                </div>
+                <div class="column">
+                    <div class="ui horizontal segment">
+                        <div class="sixteen wide field">
+                            <label>Bio</label>
+                            <p>
+                                <textarea name="bio" id="bio" placeholder="some text about you" tabindex="3"></textarea>
+                            </p>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</template>
+
+<template name="maevRegisteredUserProfileForm">
+    <div id="maevRegisteredUserProfileForm" class="stepForm transition visible">
+        <h3 class="ui header">Your profile at {{settings "service.name"}}</h3>
+        <p>substrap fields</p>
+        <form id="registered-user-profile-form" class="ui  form ">
+            <div class="ui two column grid">
+                <div class="column">
+                    <div class=" field">
+                        <label>Email</label>
+                        <input name="email" placeholder="you@example.com" type="email" tabindex="1" value="{{currentUser.emails.[0].address}}">
+                    </div>
+                </div>
+                <div class="column">
+                    <div class=" field">
+                        <label>Username</label>
+                        <input name="username" placeholder="username" type="text" tabindex="1" value="{{currentUser.username}}">
+                    </div>
+                </div>
+            </div>
+
+
+            <div class="ui grid">
+                <div class="four wide column">
+                    <div class=" field">
+                        <label>Avatar</label>
+                        {{#if currentUser.profile.avatar}}
+                        <img class="ui small image" src="{{currentUser.profile.avatar}}">
+                        {{/if}}
+                        <input name="avatar" id="avatar" placeholder="" type="text" tabindex="2" value="{{currentUser.profile.avatar}}">
+
+
+                    </div>
+                </div>
+                <div class="twelve wide column">
+                    <div class="ui horizontal segment">
+                        <div class="sixteen wide field">
+                            <label>Bio</label>
+                            <p>
+                                <textarea name="bio" id="bio" placeholder="some text about you"  tabindex="3">{{currentUser.profile.bio}}</textarea>
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="sixteen wide field">
+                <button type="submit" class="ui primary right floated button">
+                    Save
+                </button>
+                <button type="reset" class="ui right floated button" name="discard">
+                    Discard
+                </button>
+
+            </div>
+        </form>
+    </div>
+
+</template>
+
+<template name="maevRegisteredUserChangePasswordForm">
+    <h3 class="ui header">Change password for {{settings "service.name"}}</h3>
+    <p>please complete all fields</p>
+    <form id="registered-user-change-password-form" class="ui  form ">
+        <div class=" sixteen wide field">
+            <label>Current Password</label>
+            <input name="current-password" placeholder="**********" type="password" tabindex="1">
+        </div>
+        <div class="sixteen wide field">
+            <label>New Password</label>
+            <p class="strengthtest">
+                <input name="new-password" id="strong-password" placeholder="**********" type="password" tabindex="2">
+            </p>
+
+        </div>
+        <div class="sixteen wide field">
+            <label>Confirm New Password {{#if isConfirmFocus}} <span class="ui description red">({{#unless isMatching}}not matching{{else}}matching{{/unless}})</span> {{/if}}</label>
+            <input name="confirm-password"  id="confirm-password" placeholder="**********" type="password" tabindex="3">
+
+        </div>
+        <!--
+                <button class="ui submit button disabled">Register</button>
+        -->
+        <div class="sixteen wide field">
+            <button type="submit" class="ui primary right floated button">
+                Save
+            </button>
+            <button type="reset" class="ui right floated button" name="discard">
+                Discard
+            </button>
+
+        </div>
+    </form>
+</template>
+
+<template name="maevRegisteredUserPasswordReset">
+    <div class="ui grid">
+        <div class="two wide column"></div>
+        <div class="twelve wide column">
+            <h3 class="ui header">Password Reset</h3>
+            <h4>Please enter your email address, we'll send you a link to reset your password</h4>
+            <form id="password-reset-form" class="ui login form "  action="submit">
+                <div class=" sixteen wide field">
+                    <label>Email</label>
+                    <input name="email" placeholder="you@example.com" type="email">
+                </div>
+                <button class="ui submit button">Submit</button>
+            </form>
+        </div>
+    </div>
+</template>
+
+<template name="maevRegisteredUserResetPasswordForm">
+    <h3 class="ui header">Reset password for {{settings "service.name"}}</h3>
+    <p>please complete all fields</p>
+    <form id="registered-user-reset-password-form" class="ui  form " autocomplete="off">
+        <div class="sixteen wide field">
+            <label>New Password</label>
+            <p class="strengthtest">
+                <input name="new-password" id="strong-password" placeholder="**********" type="password" tabindex="1">
+            </p>
+
+        </div>
+        <div class="sixteen wide field">
+            <label>Confirm New Password {{#if isConfirmFocus}} <span class="ui description red">({{#unless isMatching}}not matching{{else}}matching{{/unless}})</span> {{/if}}</label>
+            <input name="confirm-password"  id="confirm-password" placeholder="**********" type="password" tabindex="2">
+
+        </div>
+        <!--
+                <button class="ui submit button disabled">Register</button>
+        -->
+        <div class="sixteen wide field">
+            <button type="submit" class="ui primary right floated button">
+                Save
+            </button>
+            <button class="ui right floated button" name="discard">
+                Discard
+            </button>
+
+        </div>
+    </form>
+</template>
+
+<template name="passwordResetSent">
+    <div class="ui grid">
+        <div class="two wide column"></div>
+        <div class="twelve wide column">
+            <h3>A password reset link has been sent to your email account.</h3>
+            <h3></h3>
+        </div>
+    </div>
+</template>
+
+<!--
+<template name="noEmailFound">
+    <div class="ui grid">
+        <div class="two wide column"></div>
+        <div class="twelve wide column">
+            <div class="noEmailFound">
+                <h3>No user account with that email was found.</h3>
+                <p>Are you sure that's the correct address?</p>
+                <p><a href="#">click here</a> to request a new reset email</p>
+            </div>
+        </div>
+    </div>
+</template>
+-->
+
+<!--<template name="passwordTokenExpired">
+    <div class="ui grid">
+        <div class="two wide column"></div>
+        <div class="twelve wide column">
+            <div class="passwordTokenExpired">
+                <h3>The password reset token associated with that email has expired.</h3>
+                <p>Are you using the most recent email we sent you?</p>
+                <p><a href="#">click here</a> to request a new reset email</p>
+            </div>
+        </div>
+    </div>
+</template>-->
+
+<template name="maevLoginErrorMessage">
+    <div class="ui grid">
+        <div class="two wide column"></div>
+        <div class="twelve wide column">
+            <div class="passwordTokenExpired">
+            {{#with error}}
+                <h3>{{warning}}</h3>
+                <p>{{question}}</p>
+                <p><a href="#" data-template="{{template}}">click here</a> {{action}}</p>
+            {{/with}}
+            </div>
+        </div>
+    </div>
+</template>

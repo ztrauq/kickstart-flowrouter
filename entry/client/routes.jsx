@@ -1,3 +1,3 @@
-import 'TodoApp/client/routes';
+import 'BlogApp/client/routes';
 
 FlowRouter.initialize();

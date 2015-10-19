@@ -1,0 +1,7 @@
+.ui.form label>span{
+    font-weight: 400;
+}
+
+.maev.overflow{
+    overflow: hidden;
+}

@@ -1,0 +1,97 @@
+/* CSS Document */
+
+/*
+.strength_meter{
+
+	height:23px;
+width: 154px;
+	background:white;
+	float:right;
+}
+.strength_meter div{
+	height:23px;
+	width:100%;
+	height:23px;
+	text-align:center;
+	color:black;
+	font-weight:light;
+	line-height:23px;
+}
+.button_strength{
+	float: left;
+}
+.veryweak{
+	background-color: #FFA0A0;
+border-color: #F04040!important
+}
+.weak{
+background-color: #FFB78C;
+border-color: #FF853C!important;
+}
+.medium{
+background-color: #FFEC8B;
+border-color: #FC0!important;
+}
+.strong{
+background-color: #C3FF88;
+border-color: #8DFF1C!important;
+}
+*/
+p.strengthtest{
+	position: relative;
+}
+#strong-password{
+	background: transparent;
+}
+.strength_meter{
+	position: absolute;
+	left: 0px;
+	top: 0px;
+	width: 100%;
+	height: 30px;
+	z-index:-1;
+	border-radius:5px;
+}
+.button_strength {
+	text-decoration: none;
+	/*color: #FFF;*/
+	font-size: 13px;
+}
+.strength_meter div{
+	width:0%;
+	height: 38px;
+	text-align: right;
+	color: #000;
+	line-height: 43px;
+	-webkit-transition: all .3s ease-in-out;
+	padding-right: 12px;
+	border-radius:5px;
+}
+.strength_meter div p{
+	position: absolute;
+	top: 12px;
+	right: 10px;
+	color: #666;
+	font-size:13px;
+}
+
+.veryweak{
+	background-color: #FFA0A0;
+	border-color: #F04040!important;
+	width:25%!important;
+}
+.weak{
+	background-color: #FFB78C;
+	border-color: #FF853C!important;
+	width:50%!important;
+}
+.medium{
+	background-color: #FFEC8B;
+	border-color: #FC0!important;
+	width:75%!important;
+}
+.strong{
+	background-color: #C3FF88;
+	border-color: #8DFF1C!important;
+	width:100%!important;
+}
