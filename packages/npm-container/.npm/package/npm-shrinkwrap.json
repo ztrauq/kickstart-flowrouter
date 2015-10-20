@@ -93,7 +93,7 @@
               }
             },
             "core-js": {
-              "version": "1.2.1"
+              "version": "1.2.2"
             },
             "debug": {
               "version": "2.2.0",
@@ -485,7 +485,7 @@
                       "version": "0.2.1"
                     },
                     "braces": {
-                      "version": "1.8.1",
+                      "version": "1.8.2",
                       "dependencies": {
                         "expand-range": {
                           "version": "1.8.1",
@@ -574,7 +574,7 @@
                           "version": "0.3.0"
                         },
                         "is-dotfile": {
-                          "version": "1.0.1"
+                          "version": "1.0.2"
                         },
                         "is-extglob": {
                           "version": "1.0.0"
@@ -877,7 +877,7 @@
           "version": "1.1.1"
         },
         "core-js": {
-          "version": "1.2.1"
+          "version": "1.2.2"
         },
         "debug": {
           "version": "2.2.0",
@@ -1380,7 +1380,7 @@
               "version": "1.1.1"
             },
             "core-js": {
-              "version": "1.2.1"
+              "version": "1.2.2"
             },
             "debug": {
               "version": "2.2.0",
@@ -1838,7 +1838,7 @@
                   "version": "1.0.1"
                 },
                 "caniuse-db": {
-                  "version": "1.0.30000346"
+                  "version": "1.0.30000348"
                 }
               }
             },
@@ -1922,7 +1922,7 @@
               "version": "2.0.1"
             },
             "postcss-merge-rules": {
-              "version": "2.0.0"
+              "version": "2.0.1"
             },
             "postcss-minify-font-values": {
               "version": "1.0.2",
@@ -2075,7 +2075,7 @@
               }
             },
             "postcss-value-parser": {
-              "version": "3.0.3"
+              "version": "3.1.1"
             },
             "postcss-zindex": {
               "version": "2.0.0"
@@ -2206,7 +2206,7 @@
               "version": "1.0.13",
               "dependencies": {
                 "concat-stream": {
-                  "version": "1.5.0",
+                  "version": "1.5.1",
                   "dependencies": {
                     "inherits": {
                       "version": "2.0.1"
@@ -3612,7 +3612,7 @@
           "version": "0.3.2",
           "dependencies": {
             "core-js": {
-              "version": "1.2.1"
+              "version": "1.2.2"
             },
             "loose-envify": {
               "version": "1.1.0",
@@ -3670,6 +3670,30 @@
         }
       }
     },
+    "react-remarkable": {
+      "version": "1.1.1",
+      "dependencies": {
+        "remarkable": {
+          "version": "1.6.0",
+          "dependencies": {
+            "argparse": {
+              "version": "0.1.16",
+              "dependencies": {
+                "underscore": {
+                  "version": "1.7.0"
+                },
+                "underscore.string": {
+                  "version": "2.4.0"
+                }
+              }
+            },
+            "autolinker": {
+              "version": "0.15.3"
+            }
+          }
+        }
+      }
+    },
     "react-transform-catch-errors": {
       "version": "1.0.0"
     },
@@ -3700,6 +3724,33 @@
             },
             "react-deep-force-update": {
               "version": "1.0.0"
+            }
+          }
+        }
+      }
+    },
+    "react-wysiwyg": {
+      "version": "2.1.7",
+      "dependencies": {
+        "classnames": {
+          "version": "2.2.0"
+        },
+        "escape-html": {
+          "version": "1.0.3"
+        },
+        "selection-range": {
+          "version": "1.0.1",
+          "dependencies": {
+            "dom-iterator": {
+              "version": "0.3.0",
+              "dependencies": {
+                "component-xor": {
+                  "version": "0.0.3"
+                },
+                "component-props": {
+                  "version": "1.1.1"
+                }
+              }
             }
           }
         }
@@ -4042,7 +4093,7 @@
                           "version": "0.2.1"
                         },
                         "braces": {
-                          "version": "1.8.1",
+                          "version": "1.8.2",
                           "dependencies": {
                             "expand-range": {
                               "version": "1.8.1",
@@ -4131,7 +4182,7 @@
                               "version": "0.3.0"
                             },
                             "is-dotfile": {
-                              "version": "1.0.1"
+                              "version": "1.0.2"
                             },
                             "is-extglob": {
                               "version": "1.0.0"

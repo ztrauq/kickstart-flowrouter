@@ -131,7 +131,6 @@ const EditForm = React.createClass({
 
   },
   updateBlogTitle: function () {
-    console.log(event)
     if(event.type==='blur' || (event.type==='keyup' && event.keyCode===13 ) ){
       check(event.target.innerText, String);
       this.props.blog.title = event.target.innerText;
