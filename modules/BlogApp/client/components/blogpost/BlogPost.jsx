@@ -1,3 +1,5 @@
+/* todo - this needs some work on the structure, it's quite messy */
+
 import { Component, PropTypes } from 'react';
 //import ReactMarkdown from 'react-markdown';
 import Markdown from 'react-remarkable'
@@ -120,30 +122,43 @@ const PostPreview = React.createClass({
 
 const EditForm = React.createClass({
   updateBlog: function () {
-    this.props.blog[event.target.dataset.field] = event.target.innerText;
-    Meteor.call('upsertBlog',this.props.blog)
+    if(event.type==='blur' || (event.type==='keyup' && event.keyCode===13 ) ){
+      check(event.target.innerText, String);
+      this.props.blog[event.target.dataset.field] = event.target.innerText;
+      Meteor.call('upsertBlog',this.props.blog);
+      event.target.blur();
+    }
+
   },
   updateBlogTitle: function () {
-    this.props.blog.title = event.target.innerText;
+    console.log(event)
+    if(event.type==='blur' || (event.type==='keyup' && event.keyCode===13 ) ){
+      check(event.target.innerText, String);
+      this.props.blog.title = event.target.innerText;
 
-    Meteor.call('upsertBlog',this.props.blog, function(err,res){
-      FlowRouter.redirect('/post/'+res.slug)
-    });
+      Meteor.call('upsertBlog',this.props.blog, function(err,res){
+        FlowRouter.redirect('/post/'+res.slug)
+      });
+      event.target.blur();
+    }
   },
   updateContent: function () {
     this.props.blog.content = event.target.value;
     Meteor.call('upsertBlog',this.props.blog)
   },
   render : function () {
+    const rows = (this.props.blog.content).split(/\r\n|\r|\n/).length
     return (
       <div>
         <header>
           <h1 className="ui header" data-field="title"
               contentEditable={true}
-              onBlur={this.updateBlogTitle}>{this.props.blog.title}</h1>
+              onBlur={this.updateBlogTitle}
+              onKeyUp={this.updateBlogTitle}>{this.props.blog.title}</h1>
           <h3 className="ui header" data-field="summary"
               contentEditable={true}
-              onBlur={this.updateBlog}>{this.props.blog.summary}</h3>
+              onBlur={this.updateBlog}
+              onKeyUp={this.updateBlog}>{this.props.blog.summary}</h3>
           <div className="info">posted by
             <span id="author" className="author" > inline author</span>
             <time id="date">{ this.props.blog.date}</time>
@@ -153,7 +168,7 @@ const EditForm = React.createClass({
         <article>
           <div className="ui form">
             <div className="field">
-              <textarea defaultValue={this.props.blog.content} onChange={this.updateContent} />
+              <textarea rows={rows} defaultValue={this.props.blog.content} onChange={this.updateContent} />
             </div>
           </div>
         </article>

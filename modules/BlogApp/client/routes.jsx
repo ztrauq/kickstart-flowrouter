@@ -37,3 +37,4 @@ FlowRouter.route('/post/:slug', {
     });
   }
 });
+
