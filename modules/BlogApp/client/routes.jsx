@@ -31,7 +31,6 @@ FlowRouter.route('/archive', {
 });
 FlowRouter.route('/post/:slug', {
   action(params, queryParams) {
-    console.log(params)
     ReactLayout.render(BlogApp, {
       content: <BlogPost params={params} />,
       aside: 'column b'

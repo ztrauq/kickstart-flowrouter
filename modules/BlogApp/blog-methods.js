@@ -174,6 +174,9 @@ import { Blog, Tags } from './collections/Blog';
           "upsert" : true  // insert a new document, if no existing document match the query
         }
       );
+    },
+    getSlug : function (title) {
+      return _getSlug (title);
     }
   });
 

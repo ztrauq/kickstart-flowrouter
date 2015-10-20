@@ -9,6 +9,7 @@ export default class BlogApp extends Component {
   componentWillMount() {
     require('./css/main.scss');
     require('./css/blog.scss');
+    require('./css/github.min.css');
   }
 
   render() {

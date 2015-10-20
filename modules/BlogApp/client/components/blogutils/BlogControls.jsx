@@ -9,29 +9,53 @@ import 'BlogApp/blog-methods.js';
 
 export default class PostControls extends Component {
 //const PostControls = React.createClass({
-
   render () {
+     return (
+       <CardManager data={this.props.data} />
+     )
+  }
+};
+
+const CardManager = React.createClass({
+  render : function () {
+    const isBlogAuthor = Meteor.userId() === this.props.data.author;
+    let cardController = isBlogAuthor ?
+      <CardControl data={this.props.data} /> :
+      <NullComponent />;
+    return (
+      <div>
+        {cardController}
+      </div>
+
+    )
+  }
+})
+
+const NullComponent = React.createClass({
+  render : function () {
+    return (
+      <span> </span>
+    )
+  }
+});
+
+const CardControl = React.createClass({
+  render: function () {
     let isPublished = this.props.data.published ? 'green' : 'blue';
     let className = "ui " + isPublished + " top attached button";
-    let modified = this.props.modified ?
-      <PostModified data={this.props.data} /> :
-      '';
     return (
-
       <div className={className}>
         <section className="blog-controls">
           <div className="ui compact icon menu">
-            {modified}
             <PostPublished data={this.props.data} />
             <PostArchived data={this.props.data} />
             <PostDelete data={this.props.data} />
           </div>
         </section>
       </div>
-
     )
   }
-};
+});
 
 const PostModified = React.createClass({
   render : function () {
