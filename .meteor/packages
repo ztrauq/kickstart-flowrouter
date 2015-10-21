@@ -17,7 +17,6 @@ es5-shim                # ECMAScript 5 compatibility for older br
 
 check
 
-meteorhacks:npm
 webpack:webpack
 kadira:flow-router
 kadira:react-layout
@@ -34,6 +33,7 @@ accounts-password
 email
 reactive-var
 
+<<<<<<< HEAD
 kenlimmj:hljs
 
 maev:accounts-semantic-ui
@@ -46,3 +46,5 @@ alanning:roles
 
 #garrilla:md-blog-sematic-ui
 ogourment:settings
+=======
+>>>>>>> upstream/master
