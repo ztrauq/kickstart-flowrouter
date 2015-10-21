@@ -24,8 +24,6 @@ react-runtime
 react-meteor-data
 thereactivestack:blazetoreact
 
-npm-container
-
 accounts-base
 #accounts-ui
 accounts-password
