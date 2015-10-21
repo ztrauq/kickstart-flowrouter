@@ -72,7 +72,8 @@ const PostPublished = React.createClass({
     return {published: this.props.data.published}
   },
   publish : function () {
-    this.props.data.published = this.state.published
+    this.props.data.published = this.state.published;
+    if (this.state.published) this.props.data.archived = false;
     Meteor.call('upsertBlog', this.props.data);
   },
   toggle : function () {
@@ -105,7 +106,8 @@ const PostArchived = React.createClass({
     return {archived: this.props.data.archived}
   },
   archive : function () {
-    this.props.data.archived = this.state.archived
+    this.props.data.archived = this.state.archived;
+    if (this.state.archived) this.props.data.published = false;
     Meteor.call('upsertBlog', this.props.data);
   },
   toggle : function () {

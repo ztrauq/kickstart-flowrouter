@@ -28,6 +28,7 @@ export default class BlogList extends Component {
     const query = path ==='/' ? {archived: false} : {archived: true};
     const options = {sort: Meteor.settings.public.blog.sortBy};
     const blog = Blog.find(query,options).fetch();
+    console.log(query, options, blog)
     return {
       query, blog
     };
@@ -72,11 +73,35 @@ const BlogListControl = React.createClass({
   changeRoute: function () {
     FlowRouter.go('/' + this.props.route.url)
   },
+  createNewPost: function () {
+    //create the new post
+    console.log('createNewPost');
+    const newBlog = {
+      published: false,
+      archived: false,
+      title: "new post",
+      author: Meteor.userId(),
+      date: new Date(),
+      summary: "this is a summary field",
+      content: "# This is the content\n It uses standard Markup",
+      quicklist: false
+    };
+    Meteor.call('upsertBlog', newBlog, function(err, res){
+      if (err) return console.log(err); // todo - handle this error
+
+      //then go to new post
+      console.log('in upsert', res);
+      FlowRouter.go('/post/'+res.slug);
+    })
+
+  },
   render: function(){
     return (
       <div className="ui basic segment">
-        <div id="mdblog-new" className="ui labeled icon button">
-          <i className="red edit icon" /> New Post
+        <div id="mdblog-new"
+             className="ui labeled icon button"
+             onClick={this.createNewPost} >
+          <i className="red edit icon"/> New Post
         </div>
         <div id="mdblog-toggleArchive"
              className="ui right labeled icon button"

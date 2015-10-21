@@ -6,6 +6,18 @@ import Markdown from 'react-remarkable'
 import ReactMixin from 'react-mixin';
 import { Blog } from 'BlogApp/collections/Blog';
 
+window.onbeforeunload = function (e) {
+  var message = "Your confirmation message goes here.",
+    e = e || window.event;
+  // For IE and Firefox
+  if (e) {
+    e.returnValue = message;
+  }
+
+  // For Safari
+  return message;
+};
+
 @ReactMixin.decorate(ReactMeteorData)
 export default class BlogPost extends Component {
 

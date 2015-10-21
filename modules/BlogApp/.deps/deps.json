@@ -1,0 +1,17 @@
+{
+  packages: [
+    "check", "reactive-var", "email", "kenlimj:hljs", "and:so-on"
+  ]
+  npm: {
+    "sass-loader": "3.0.0",
+    "react-intl" : "1.2.0",
+    "react-wysiwyg": "2.1.7",
+    "react-remarkable": "1.1.1"
+  },
+  loaders: {
+    scss:  { test: /\.scss$/, loader: 'style!css!sass' }
+  },
+  extensions: [
+    '.scss'
+  ]
+}
