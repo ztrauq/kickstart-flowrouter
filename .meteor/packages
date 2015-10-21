@@ -31,7 +31,6 @@ accounts-password
 email
 reactive-var
 
-<<<<<<< HEAD
 kenlimmj:hljs
 
 maev:accounts-semantic-ui
@@ -44,5 +43,4 @@ alanning:roles
 
 #garrilla:md-blog-sematic-ui
 ogourment:settings
-=======
->>>>>>> upstream/master
+

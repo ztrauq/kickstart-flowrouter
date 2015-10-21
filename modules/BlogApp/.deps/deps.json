@@ -1,11 +1,17 @@
 {
   packages: [
-    "check", "reactive-var", "email", "kenlimj:hljs", "and:so-on"
-  ]
+    "check", "reactive-var", "email", "kenlimj:hljs", "garrilla:3r", "semantic:ui-css",
+    "alanning:roles", "ogourment:settings"
+
+  ],
+  localpackages: [
+    "maev:accounts-semantic-ui",
+    "maev:modal-semantic-ui"
+  ],
   npm: {
+    "node-sass" : "3.3.3",
     "sass-loader": "3.0.0",
     "react-intl" : "1.2.0",
-    "react-wysiwyg": "2.1.7",
     "react-remarkable": "1.1.1"
   },
   loaders: {

@@ -15,9 +15,9 @@
   "react-transform-catch-errors": "1.0.0",
   "redbox-react": "1.1.1",
 
+  "node-sass" : "3.3.3",
   "sass-loader": "3.0.0",
   "react-intl" : "1.2.0",
 
-  "react-wysiwyg": "2.1.7",
   "react-remarkable": "1.1.1"
 }
