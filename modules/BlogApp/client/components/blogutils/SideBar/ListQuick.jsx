@@ -23,7 +23,10 @@ export default class ListQuick extends Component {
     return (
       <div className="ui">
         <h4 className="ui top attached header">
-          Quick list
+          <i className="bookmark icon" />
+          <div className="content">
+            Quick List
+          </div>
         </h4>
         <div className="ui attached segment">
           <div className="ui list">

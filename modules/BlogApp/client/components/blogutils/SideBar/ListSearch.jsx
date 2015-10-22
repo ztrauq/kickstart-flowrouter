@@ -29,7 +29,10 @@ export default class ListSearch extends Component {
     return (
       <div>
         <h4 className="ui top attached header">
-          Search
+          <i className="search icon" />
+          <div className="content">
+            Quick List
+          </div>
         </h4>
         <div className="ui attached segment">
           <div className="ui fluid icon input">
