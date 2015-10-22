@@ -56,6 +56,9 @@ export default class ListSearch extends Component {
             Search
           </div>
         </h4>
+        <div className="ui attached basic segment">
+          <p>A simple, case-insensitive pattern matching search, finds a 'word' or 'phrase string' in the title or summary.</p>
+        </div>
         <div className="ui attached segment">
           <div className="ui fluid action input">
             <input value={value} id="blogSearch" type="text" placeholder="Search..."

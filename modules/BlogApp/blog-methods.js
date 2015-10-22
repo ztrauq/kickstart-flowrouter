@@ -179,6 +179,10 @@ import { Blog, Tags } from './collections/Blog';
     },
     getSlug : function (title) {
       return _getSlug (title);
+    },
+    quicklist: function () {
+      console.log('check')
+      return Blog.find({quicklist: true}).fetch();
     }
   });
 
