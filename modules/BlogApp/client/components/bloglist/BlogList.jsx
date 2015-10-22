@@ -10,6 +10,8 @@ import PostControls from '../blogutils/BlogControls.jsx';
 import CardTags from './CardTags.jsx';
 import BlogPostAuthor from '../blogutils/BlogPostAuthor.jsx';
 
+Session.set('blogSubFilter', null);
+
 @ReactMixin.decorate(ReactMeteorData)
 export default class BlogList extends Component {
 
@@ -23,12 +25,12 @@ export default class BlogList extends Component {
   }
 
   getMeteorData() {
-    Meteor.subscribe('blog');
+    console.log(Session.get('blogSubFilter'))
+    Meteor.subscribe('blog', Session.get('blogSubFilter'));
     const path = this.state.path;
     const query = path ==='/' ? {archived: false} : {archived: true};
     const options = {sort: Meteor.settings.public.blog.sortBy};
     const blog = Blog.find(query,options).fetch();
-    console.log(query, options, blog)
     return {
       query, blog
     };
@@ -135,7 +137,7 @@ const Post = React.createClass({
   render: function(){
 
     const FormattedRelative = ReactIntl.FormattedRelative;
-    const path = "post/" + this.props.data.slug ;//+ "?slug=" + this.props.data.slug;
+    const path = "/post/" + this.props.data.slug ;//+ "?slug=" + this.props.data.slug;
     const postControl = Meteor.user() ?
       <PostControls data={this.props.data} /> :
       <var className="empty space" value="null"/>

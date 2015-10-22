@@ -3,6 +3,7 @@
 import BlogApp from './BlogApp';
 import BlogList from './components/bloglist/BlogList';
 import BlogPost from './components/blogpost/BlogPost';
+import SideBar from './components/blogutils/SideBar/SideBar.jsx';
 
 /*
 export default (
@@ -17,15 +18,15 @@ FlowRouter.route('/', {
   action() {
     ReactLayout.render(BlogApp, {
       content: <BlogList />,
-      aside: 'column a'
+      aside: <SideBar isPost={false} />
     });
   }
-})
+});
 FlowRouter.route('/archive', {
   action() {
     ReactLayout.render(BlogApp, {
       content: <BlogList />,
-      aside: 'something different'
+      aside: <SideBar isPost={false} />
     });
   }
 });
@@ -33,7 +34,7 @@ FlowRouter.route('/post/:slug', {
   action(params, queryParams) {
     ReactLayout.render(BlogApp, {
       content: <BlogPost params={params} />,
-      aside: 'column b'
+      aside: <SideBar isPost={true} />
     });
   }
 });

@@ -21,11 +21,7 @@ export default class Stage extends Component {
                     {this.props.content}
                   </div>
                 </div>
-                <div className="four wide column">
-                  <div className="ui sticky">
-                    <h3>{this.props.aside}</h3>
-                  </div>
-                </div>
+                {this.props.aside}
               </div>
             </div>
           </div>
