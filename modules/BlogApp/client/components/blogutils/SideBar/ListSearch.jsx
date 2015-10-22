@@ -1,3 +1,12 @@
+/*
+todo -
+  add functionality to search
+  - currently only single pattern so could add
+  -- keyword
+  -- phrase
+  -- etc
+ */
+
 import { Component, PropTypes } from 'react';
 import ReactMixin from 'react-mixin';
 import ReactIntl from 'react-intl'
