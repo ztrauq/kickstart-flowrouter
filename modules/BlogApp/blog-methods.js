@@ -26,8 +26,8 @@ import { Blog, Tags } from './collections/Blog';
       }
 
       if (Roles.userIsInRole(this.userId, ['mdblog-author'])) {
-        console.log(criteria, query,Blog.find(query).count());
-        console.log(Blog.find(query).fetch())
+        //console.log(criteria, query,Blog.find(query).count());
+        //console.log(Blog.find(query).fetch())
         return Blog.find(query);
       } else {
         _.extend(query,{published: true});

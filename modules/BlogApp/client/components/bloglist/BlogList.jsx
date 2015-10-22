@@ -25,7 +25,6 @@ export default class BlogList extends Component {
   }
 
   getMeteorData() {
-    console.log(Session.get('blogSubFilter'))
     Meteor.subscribe('blog', Session.get('blogSubFilter'));
     const path = this.state.path;
     const query = path ==='/' ? {archived: false} : {archived: true};
@@ -137,14 +136,15 @@ const Post = React.createClass({
   highlight: function (field) {
     const filter = Session.get('blogSubFilter');
     if (filter){
-      const marker = filter.str;
-      const array = (field).split(marker);
-      const highlight = array.map(function (particle, i) {
+      const regex = new RegExp(["",filter.str,""].join(""),"i");
+
+      const marker = field.match(regex);
+      const array = (field).split(regex);
+      return array.map(function (particle, i) {
         return i < array.length - 1 ?
-          <span key={i}>{particle}<span className="hi">{marker}</span></span>
+          <span key={i}>{particle}<span className="ui search highlight">{marker[i]}</span></span>
           : <span>{particle}</span>;
       });
-      return highlight;
     } else {
       return field;
     }
@@ -160,9 +160,6 @@ const Post = React.createClass({
     let title, summary;
       title = this.highlight(this.props.data.title);
       summary = this.highlight(this.props.data.summary);
-
-
-
     return (
       <div className="ui card enter">
         {postControl}

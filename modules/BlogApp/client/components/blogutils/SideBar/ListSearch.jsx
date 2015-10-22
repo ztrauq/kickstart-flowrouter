@@ -17,14 +17,12 @@ export default class ListSearch extends Component {
   }
 
   search() {
-    console.log(event.target.value)
     const value = event.target.value;
     const filter = value.length > 0 ? {type: 'search', str: value} : null;
     Session.set('blogSubFilter', filter);
   }
 
   render () {
-    console.log(this.data.blog);
     const items = this.data.blog.map(function(item, i){
       return <QuickListItems data={item} key={i}/>
     });

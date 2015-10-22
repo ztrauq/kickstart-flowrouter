@@ -10,14 +10,13 @@ export default class ListQuick extends Component {
   getMeteorData() {
     Meteor.subscribe('blog',Session.get('blogSubFilter'));
     let query = {quicklist: true};
-    var blog = Blog.find(query).fetch()
+    var blog = Blog.find(query).fetch();
     return {
       blog
     };
   }
 
   render () {
-    console.log(this.data.blog);
     const items = this.data.blog.map(function(item, i){
       return <QuickListItems data={item} key={i}/>
     });
