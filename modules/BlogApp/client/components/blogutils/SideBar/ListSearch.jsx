@@ -43,7 +43,6 @@ export default class ListSearch extends Component {
   }
 
   render () {
-    console.log(this.state.value)
     const filter = Session.get('blogSubFilter');
     const value = filter ? filter.str : '';
     const items = this.data.blog.map(function(item, i){
