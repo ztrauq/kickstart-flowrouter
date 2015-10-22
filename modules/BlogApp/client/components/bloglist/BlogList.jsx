@@ -134,19 +134,41 @@ const Post = React.createClass({
   componentWillReceiveProps : function (nextProps) {
     this.setState(nextProps);
   },
+  highlight: function (field) {
+    const filter = Session.get('blogSubFilter');
+    if (filter){
+      const marker = filter.str;
+      const array = (field).split(marker);
+      const highlight = array.map(function (particle, i) {
+        return i < array.length - 1 ?
+          <span key={i}>{particle}<span className="hi">{marker}</span></span>
+          : <span>{particle}</span>;
+      });
+      return highlight;
+    } else {
+      return field;
+    }
+
+  },
   render: function(){
 
     const FormattedRelative = ReactIntl.FormattedRelative;
     const path = "/post/" + this.props.data.slug ;//+ "?slug=" + this.props.data.slug;
     const postControl = Meteor.user() ?
       <PostControls data={this.props.data} /> :
-      <var className="empty space" value="null"/>
+      <var className="empty space" value="null"/>;
+    let title, summary;
+      title = this.highlight(this.props.data.title);
+      summary = this.highlight(this.props.data.summary);
+
+
+
     return (
       <div className="ui card enter">
         {postControl}
         <div className="content">
           {/*<a href={path} className="header">{this.props.data.title}</a>*/}
-          <a href={path} className="header">{this.props.data.title}</a>
+          <a href={path} className="header">{title}</a>
           <div className="meta">
               <span className="category">
                   <span className="info">
@@ -157,7 +179,7 @@ const Post = React.createClass({
               </span>
           </div>
           <div className="description">
-            <p>{this.props.data.summary} </p>
+            <p>{summary} </p>
           </div>
         </div>
         <div className="content">
