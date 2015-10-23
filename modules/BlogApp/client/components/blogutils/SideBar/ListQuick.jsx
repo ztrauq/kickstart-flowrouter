@@ -9,33 +9,31 @@ export default class ListQuick extends Component {
 
   constructor(props) {
     super(props);
-    this.state = {blog: {}};
+    this.state = {blog: []};
   }
 
   componentWillMount () {
-    let self = this;
+    const self = this;
     Meteor.call('quicklist', function (err, res) {
-      if (err) return console.log(err);
+      if (err) return console.log(err) // handle this error
 
-      console.log(res)
-
-      self.setState({blog: res})
-    });
+      self.state.blog = res;
+    })
   }
 
+
   getMeteorData() {
-    //Meteor.subscribe('blog',Session.get('blogSubFilter'));
-/*    const query = {quicklist: true};
-    const blog = Blog.find(query).fetch();
-    //const blog = Meteor.call('quicklist');
+    /*Meteor.subscribe('blog',Session.get('blogSubFilter'));
+    let query = {quicklist: true};
+    var blog = Blog.find(query).fetch();*/
     return {
-      blog
-    };*/
+      //blog
+    };
   }
 
   render () {
 
-    const items = (this.state.blog).map(function(item, i){
+    const items = this.state.blog.map(function(item, i){
       return <QuickListItems data={item} key={i}/>
     });
     return (
@@ -48,7 +46,7 @@ export default class ListQuick extends Component {
         </h4>
 
         <div className="ui attached basic segment">
-          <p>A list of posts we've bookmarked as we think thy're required reading.</p>
+          <p>A list of posts we've bookmarked as we think they're useful reading.</p>
         </div>
         <div className="ui attached segment">
           <div className="ui list">

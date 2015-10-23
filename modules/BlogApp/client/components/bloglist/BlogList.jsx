@@ -143,7 +143,7 @@ const Post = React.createClass({
       return array.map(function (particle, i) {
         return i < array.length - 1 ?
           <span key={i}>{particle}<span className="ui search highlight">{marker[i]}</span></span>
-          : <span>{particle}</span>;
+          : <span key={i}>{particle}</span>;
       });
     } else {
       return field;
