@@ -38,7 +38,7 @@ export default class ListQuick extends Component {
     });
     return (
       <div className="ui">
-        <h4 className="ui top attached header">
+        <h4 className="ui top attached white inverted header">
           <i className="bookmark icon" />
           <div className="content">
             Quick List

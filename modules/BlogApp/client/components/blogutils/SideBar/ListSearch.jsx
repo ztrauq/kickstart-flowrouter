@@ -50,7 +50,7 @@ export default class ListSearch extends Component {
     });
     return (
       <div>
-        <h4 className="ui top attached header">
+        <h4 className="ui top attached white inverted header">
           <i className="search icon" />
           <div className="content">
             Search
