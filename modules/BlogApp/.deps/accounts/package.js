@@ -18,7 +18,8 @@ Package.onUse(function(api) {
     'accounts-base',
     'underscore',
     'templating',
-    'session'
+    'session',
+    'reactive-var'
   ], 'client');
   api.use([
     'jparker:gravatar@0.4.1',
