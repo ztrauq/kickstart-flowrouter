@@ -22,7 +22,7 @@ export default class ListSearch extends Component {
   }
 
   getMeteorData () {
-    Meteor.subscribe('blog',Session.get('blogSubFilter'));
+    //Meteor.subscribe('blog',Session.get('blogSubFilter'));
     let query = {quicklist: true};
     var blog = Blog.find(query).fetch();
     return {

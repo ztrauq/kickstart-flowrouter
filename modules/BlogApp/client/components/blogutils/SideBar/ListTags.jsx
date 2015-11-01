@@ -10,11 +10,11 @@ todo -
 import { Component, PropTypes } from 'react';
 import ReactMixin from 'react-mixin';
 import ReactIntl from 'react-intl'
-import { Blog } from 'BlogApp/collections/Blog';
+import { Tags } from 'BlogApp/collections/Blog';
 import 'BlogApp/blog-methods.js';
 
 @ReactMixin.decorate(ReactMeteorData)
-export default class ListSearch extends Component {
+export default class ListTags extends Component {
 
   constructor() {
     super();
@@ -22,50 +22,33 @@ export default class ListSearch extends Component {
   }
 
   getMeteorData () {
-    Meteor.subscribe('blog',Session.get('blogSubFilter'));
-    let query = {quicklist: true};
-    var blog = Blog.find(query).fetch();
+    Meteor.subscribe('tags')
+    const tags = Tags.find({},{sort: {count: -1, tag: 1}, limit: 20 }).fetch();
     return {
-      blog
+      tags
     };
   }
 
-  search () {
-    const value = event.target.value;
-    this.setState({value: value})
-    const filter = value.length > 0 ? {type: 'search', str: value} : null;
-    Session.set('blogSubFilter', filter);
-  }
-
-  clearSearch () {
-    //this.setState({value: ''})
-    Session.set('blogSubFilter', null);
-  }
 
   render () {
-    const filter = Session.get('blogSubFilter');
-    const value = filter ? filter.str : '';
-    const items = this.data.blog.map(function(item, i){
-      return <QuickListItems data={item} key={i}/>
+    console.log(this.data.tags)
+    const tags = this.data.tags.map(function(tag, i){
+      return <TagItem data={tag} key={i} initialSelected={false}/>
     });
     return (
       <div>
         <h4 className="ui top attached white inverted header">
-          <i className="search icon" />
+          <i className="tags icon" />
           <div className="content">
-            Search
+            Tags
           </div>
         </h4>
         <div className="ui attached basic segment">
-          <p>A simple, case-insensitive pattern matching search, finds a 'word' or 'phrase string' in the title or summary.</p>
+          <p>A standard tagging feature to allow you to find posts with certain tags</p>
         </div>
         <div className="ui attached segment">
-          <div className="ui fluid action input">
-            <input value={value} id="blogSearch" type="text" placeholder="Search..."
-              onChange={this.search}/>
-            <button className="ui icon button" onClick={this.clearSearch}>
-              <i className="remove icon" />
-            </button>
+          <div className="ui  labels">
+            {tags}
           </div>
         </div>
       </div>
@@ -73,13 +56,44 @@ export default class ListSearch extends Component {
   }
 };
 
-const QuickListItems = React.createClass({
+const TagItem = React.createClass({
+  getInitialState: function () {
+    return {selected: this.props.initialSelected};
+  },
+  findTags: function () {
+    if(!this.state.selected){
+      //$('#blogSearch').val('');
+      console.log('clicked', this.state.selected)
+      this.setState({selected: !this.state.selected});
+      let filter = Session.get('blogSubFilter');
+      if(!filter || filter.type==='search') filter = {tags: [], type: 'tags'};
+      filter.tags.push(this.props.data.posts);
+      Session.set('blogSubFilter', filter);
+    } else {
+      console.log('clicked', this.state.selected)
+      this.setState({selected: !this.state.selected});
+      var filter = Session.get('blogSubFilter');
+      var posts = this.props.data.posts;
+      console.log('posts',this.props.data.posts)
+      var testArr = _.map(filter.tags, function(d){
+        return _.isEqual(d, posts)
+      });
+      var i = _.indexOf(testArr, true);
+      if(i>=0) filter.tags.splice(i, 1);
+      if(filter.tags.length === 0) filter = null;
+      Session.set('blogSubFilter', filter);
+    }
+  },
   render: function () {
-    const path = "/post/" + this.props.data.slug ;
+    console.log(this.state.selected)
+    const className = !this.state.selected ? "ui yellow label" : "ui red label";
+    //console.log(this.props.data);
     return (
-      <a className="item" href={path}>
-        <div className="header">{this.props.data.title}</div>
-        <div className="description">{this.props.data.summary}</div>
+      <a className={className}
+         onClick={this.findTags}
+      >
+        {this.props.data.tag}
+        <div className="detail">{this.props.data.count}</div>
       </a>
     )
   }

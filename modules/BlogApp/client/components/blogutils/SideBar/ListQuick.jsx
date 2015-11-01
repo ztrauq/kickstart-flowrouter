@@ -13,11 +13,10 @@ export default class ListQuick extends Component {
   }
 
   componentWillMount () {
-    const self = this;
-    Meteor.call('quicklist', function (err, res) {
+    Meteor.call('quicklist',  (err, res) => {
       if (err) return console.log(err) // handle this error
 
-      self.state.blog = res;
+      this.setState({blog: res});
     })
   }
 
@@ -32,7 +31,6 @@ export default class ListQuick extends Component {
   }
 
   render () {
-
     const items = this.state.blog.map(function(item, i){
       return <QuickListItems data={item} key={i}/>
     });

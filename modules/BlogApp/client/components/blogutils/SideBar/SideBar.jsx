@@ -6,6 +6,7 @@ import 'BlogApp/blog-methods.js';
 import PostControls from '../BlogControls.jsx';
 import ListQuick from './ListQuick.jsx';
 import ListSearch from './ListSearch.jsx';
+import ListTags from './ListTags.jsx';
 
 @ReactMixin.decorate(ReactMeteorData)
 export default class SideBar extends Component {
@@ -38,6 +39,8 @@ const List = React.createClass({
         <ListQuick />
         <div className="ui hidden divider"></div>
         <ListSearch />
+        <div className="ui hidden divider"></div>
+        <ListTags />
       </div>
 
 
